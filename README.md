@@ -9,7 +9,7 @@ I took the implementation of a soduku solver from the blog post at https://abhin
 The complexity of the program was far greater than the current level of the class, and diving into the program to see where alterations could be made was initially rather daunting. 
 
 The key to the initial implementation was the function pruneGrid. 
-The board's state at any step of the algorithm is represented as a two dimensional grid of fixed cells, and unfixed cells with a set of possible values.
+The sudoku board's state at any step of the algorithm is represented as a two dimensional grid of fixed cells, and unfixed cells with a set of possible values.
 
 For the search algorithm to narrow down a solution, pruneGrid takes a sudoku grid and for each unfixed cell in the grid it removes all possible values from that cell that are equal to the value of a fixed cell in that unfixed cell’s row, as they would violate the rules of sudoku.
 
