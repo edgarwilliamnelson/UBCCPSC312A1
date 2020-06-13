@@ -13,9 +13,9 @@ The sudoku board's state at any step of the algorithm is represented as a two di
 
 For the search algorithm to narrow down a solution, pruneGrid takes a sudoku grid and for each unfixed cell in the grid it removes all possible values from that cell that are equal to the value of a fixed cell in that unfixed cell’s row, as they would violate the rules of sudoku.
 
-The same operation is performed on the columns of the grid by transposing the grid, making the columns the rows, and passing that grid to pruneGrid. This is done as pruneGrid only makes comparisons between cells in the same row.
+The same operation is performed on the columns by transposing the grid, thus making the columns into the rows, and passing that grid to pruneGrid. This is done as pruneGrid only makes comparisons between cells in the same row. The grid is then transposed again returning the rows back to their original positions. This can be seen on line 153 of Xsudoku.hs.
 
-To perform the last constraint for regular sudoku, that the 3x3 subgrids must contain all distinct values, the function subGridsToRows takes a sudoku grid and returns a new grid where each of the subgrids is its own row.  This is then pruned by pruneGrid. The resulting grid is then fed back into subGridsToRows that is conveniently its own back-transform. 
+To perform the last constraint for regular sudoku, that each of the four 3x3 subgrids must contain all distinct values, the function subGridsToRows takes a sudoku grid and returns a new grid where each of the subgrids is its own row.  This is then pruned by pruneGrid. The resulting grid is then fed back into subGridsToRows that is conveniently its own back-transform. 
 
 As pruneGrid was addressing the inital three constraints of regular sudoku, it was clearly the place to begin insertions that would addition the additional diagonal constraint for sudoku X.
 
