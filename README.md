@@ -17,7 +17,8 @@ The same operation is performed on the columns of the grid by transposing the gr
 
 To perform the last constraint for regular sudoku, that the 3x3 subgrids must contain all distinct values, the function subGridsToRows takes a sudoku grid and returns a new grid where each of the subgrids is its own row.  This is then pruned by pruneGrid. The resulting grid is then fed back into subGridsToRows that is conveniently its own back-transform. 
 
-In sudoku X the additional constraint is that both the left and right diagonal contain all distinct values. 
+As pruneGrid was addressing the inital three constraints of regular sudoku, it was clearly the place to begin insertions that would addition the additional diagonal constraint for sudoku X.
 
-As Haskell is a purely functional language I could only pass the output of one grid operation to the next.
-Thus the state of the overall grid needed to be maintained during the pruning of the diagonals, to facilitate this the cells from one diagonal were copied from the grid and placed in their own rows. These rows were then appended to the top of the top of the grid and this 10x9 Grid was then pruned. The now pruned diagonal cells were then reinserted into their original diagonal positions in the grid, adding the needed constraint.
+As Haskell is a functional programming language the largest hurdle I encountered was the inability to consider the cells in the diagonals independently. The entire grid needed to maintained during the process of applying the diagonal constraint.
+
+To facilitate this the cells from one diagonal were copied from the grid and placed in their own rows, these rows were then appended to the top of the top of the grid and this 10x9 Grid was then pruned. The now pruned diagonal cells were then reinserted into their original diagonal positions in the grid adding the needed constraint.
