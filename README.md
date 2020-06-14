@@ -21,4 +21,4 @@ As pruneGrid was addressing the inital three constraints of regular sudoku, it w
 
 Since Haskell is a  purely functional programming language the largest hurdle I encountered was the inability to consider the cells in the diagonals independently. The entire grid needed to maintained during the process of applying the diagonal constraint.
 
-To facilitate this the cells from the diagonals were copied from the grid and placed in their own rows, these rows were then appended to the top of the top of the grid and this 10x9 Grid was then passed to pruneCells. The diagonal cells would then have the necessary comparisons and potential values removed, adding the addition constraint of sudoku X.
+To facilitate this the cells from the diagonals were copied from the grid and placed in their own rows, these rows were then appended to the top of the top of the grid and this 10x9 Grid was then passed to pruneCells. The diagonal cells would then have the necessary comparisons made and potential values removed, adding the addition constraint of sudoku X.
