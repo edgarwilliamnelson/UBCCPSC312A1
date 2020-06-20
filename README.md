@@ -13,14 +13,14 @@ The sudoku board's state at any step of the algorithm is represented as a two di
 
 For a sudoku solution to be correct all values in each row, column, and 3x3 subgrid must be distinct. For the search algorithm to narrow down a solution, pruneGrid enforces these constraints in the following three operations:
 
-1) The current grid is passed to pruneGrid, for each unfixed cell in the grid it removes all values from that cell's set of possibilities that are equal to a fixed cell in it's row.
+1) The current grid is passed to pruneCells, for each unfixed cell in the grid it removes all values from that cell's set of possibilities that are equal to a fixed cell in it's row.
 
-2) The same operation is performed on the columns by transposing the grid, thus making the columns into the rows, and passing that grid to pruneGrid. This is done as pruneGrid only makes comparisons between cells in the same row. The grid is then transposed again returning the rows back to their original positions. This can be seen on line 153 of Xsudoku.hs.
+2) The same operation is performed on the columns by transposing the grid, thus making the columns into the rows, and passing that grid to pruneCells. This is done as pruneCells only makes comparisons between cells in the same row. The grid is then transposed again returning the rows back to their original positions. This can be seen on line 153 of Xsudoku.hs.
 
-3) To perform the last constraint for regular sudoku, that each of the four 3x3 subgrids must contain all distinct values, the function subGridsToRows takes a sudoku grid and returns a new grid where each of the subgrids is its own row.  This is then pruned by pruneGrid. The resulting grid is then fed back into subGridsToRows that is conveniently its own back-transform. 
+3) To perform the last constraint for regular sudoku, that each of the four 3x3 subgrids must contain all distinct values, the function subGridsToRows takes a sudoku grid and returns a new grid where each of the subgrids is its own row.  This is then pruned by pruneCells. The resulting grid is then fed back into subGridsToRows that is conveniently its own back-transform. 
 
 As pruneGrid was addressing the inital three constraints of regular sudoku, it was clearly the place to begin insertions that would introduce the additional diagonal constraint for sudoku X.
 
 Since Haskell is a purely functional programming language the largest hurdle I encountered was the inability to consider the cells in the diagonals independently. The entire grid needed to be maintained during the process of applying the diagonal constraint.
 
-To facilitate this the cells from the diagonals were copied from the grid and placed in their own rows, these rows were then appended to the top of the grid and this 10x9 Grid was then passed to pruneGrid. The diagonal cells would then have the necessary comparisons made and potential values removed. They would then be reinserted back into their original positions in the grid (overwriting their unpruned originals). Thus adding the additional constraint of sudoku X.
+To facilitate this the cells from the diagonals were copied from the grid and placed in their own rows, these rows were then appended to the top of the grid and this 10x9 Grid was then passed to pruneCells. The diagonal cells would then have the necessary comparisons made and potential values removed. They would then be reinserted back into their original positions in the grid (overwriting their unpruned originals). Thus adding the additional constraint of sudoku X.
